@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}	
+    <div id="wrapper">
+    	{% block headermenu %}
+                <div id="container" class="main-menu-container">
+                    <div class="main-menu-wrapper">
+                    	<ul class="main-menu">
+                    		<li><a href="{{ url('invoice_index') }}">Invoices</a></li>
+                    		<li><a href="{{ url('user_index') }}">Users</a></li>
+                    		<li><a href="{{ url('company_index') }}">Companies</a></li>
+                    		<li><a href="{{ url('client_index') }}">Clients</a></li>
+                    		<li><a href="{{ url('product_index') }}">Products</a></li>
+                    	</ul>
+                    </div>
+                </div>
+        {% endblock %}
+        {% block middlebody %}
+                <div id="container">
+                	<div id="container-wrapper">
+{#                     	{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}#}
+                        {% block pagebody %}
+                        {% endblock %}
+                    </div>
+                </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+        #wrapper { margin: 0 auto; max-width: 1000px; width: 95%; }
+        #wrapper #container { background: #FFF; }    
+        #container {  width: 100%; float:left;  }
+        #container-wrapper {  width: 95%; padding-left:2.5%; float:left;  }
+        .main-menu {  width: 100%; float:left;  }
+        .main-menu-wrapper { width: 100%; float:left; }
+        .main-menu {  width: 95%; padding-left:2.5%; float:left;  }
+        .main-menu li { list-style: none; float:left; padding: 15px 15px 15px 0; }
+        table { border: 1px solid #000; width: 100%;}
+        table td { border: 1px solid #000;}
+    </style>
+    {% block pagestylesheets %}
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}	
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    {% block pagejavsacripts %}
+    {% endblock %}
+{% endblock %}

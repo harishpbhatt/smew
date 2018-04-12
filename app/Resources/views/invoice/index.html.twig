@@ -1,0 +1,75 @@
+{% extends 'baseelements/themebase.html.twig' %}
+
+{% block pagebody %}
+    <h1>Invoices list</h1>
+	<table>
+        <thead>
+            <tr>
+            	<select id="company" class="js_company">
+            		<option>Please select company</option>
+            		{% for company in companies %}
+            		<option value="{{company.id}}"
+            		{% if selectedcompany == company.id %} selected="selected" {% endif %}
+            		>{{company.name}}</option>
+            		{% endfor %}
+            	</select>
+            </tr>
+        </thead>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Invoiceno</th>
+                <th>Invoicedate</th>
+                <th>Challanno</th>
+                <th>Challandate</th>
+                <th>Pono</th>
+                <th>Podate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invoice in invoices %}
+            <tr>
+                <td><a href="{{ path('invoice_show', { 'id': invoice.id }) }}">{{ invoice.id }}</a></td>
+                <td>{{ invoice.invoiceNo }}</td>
+                <td>{% if invoice.invoiceDate %}{{ invoice.invoiceDate|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ invoice.challanNo }}</td>
+                <td>{% if invoice.challanDate %}{{ invoice.challanDate|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ invoice.poNo }}</td>
+                <td>{% if invoice.poDate %}{{ invoice.poDate|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invoice_show', { 'id': invoice.id }) }}">Show</a>
+                        </li>
+                        <li><a href="{{ url('invoiceproduct_index',{'invoiceid':invoice.id}) }}">Products</a></li>
+                        <li>
+                            <a href="{{ path('invoice_edit', { 'id': invoice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invoice_new') }}">Create a new invoice</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block pagejavsacripts %}
+    <script type="application/javascript">
+        $( document ).ready(function() {
+            $( ".js_company" ).change(function() {
+                $company = $( ".js_company" ).val();
+                $url = '{{ path("invoice_index") }}?company='+$company;
+                window.location.href = $url;
+          	});
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'baseelements/themebase.html.twig' %}
+
+{% block pagebody %}
+    <h1>Invoiceproduct creation</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+        
+{#         {{ form_widget(form) }}        #}
+        <div hidden="true">{{ form_row(form.invoice) }}</div>
+        {{ form_row(form.product) }}
+        {{ form_row(form.quantity) }}
+        {{ form_row(form.hsnno) }}
+        <div hidden="true">{{ form_row(form.name) }}</div>
+        <div hidden="true">{{ form_row(form.drawingcode) }}</div>
+        <div hidden="true">{{ form_row(form.unitprice) }}</div>
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('invoiceproduct_index',{'invoiceid':app.request.get('invoiceid')}) }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block pagejavsacripts %}
+    <script type="application/javascript">
+        $( ".js-product" ).change(function() {
+            $productDetails = $( this ).find(':selected').data('productName');
+            $productDrawingcode = $( this ).find(':selected').data('productDrawingcode');
+            $productUnitprice = $( this ).find(':selected').data('productUnitprice');
+
+            $( '.js-product-name' ).val($productDetails);
+            $( '.js-product-drawingcode' ).val($productDrawingcode);
+            $( '.js-product-unitprice' ).val($productUnitprice);
+      	});
+    </script>
+{% endblock %}

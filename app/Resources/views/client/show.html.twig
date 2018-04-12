@@ -1,0 +1,48 @@
+{% extends 'baseelements/themebase.html.twig' %}
+
+{% block pagebody %}
+    <h1>Client</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ client.title }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ client.street }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ client.city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ client.state }}</td>
+            </tr>
+            <tr>
+                <th>Pincode</th>
+                <td>{{ client.pincode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('client_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('client_edit', { 'id': client.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'baseelements/themebase.html.twig' %}
+
+{% block pagebody %}
+    <h1>Invoiceproducts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invoiceProduct in invoiceProducts %}
+            <tr>
+                <td><a href="{{ path('invoiceproduct_show', { 'id': invoiceProduct.id,'invoiceid':app.request.get('invoiceid') }) }}">{{ invoiceProduct.id }}</a></td>
+                <td>{{ invoiceProduct.product.name }}</td>
+                <td>{{ invoiceProduct.quantity }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invoiceproduct_show', { 'id': invoiceProduct.id,'invoiceid':app.request.get('invoiceid') }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invoiceproduct_edit', { 'id': invoiceProduct.id,'invoiceid':app.request.get('invoiceid') }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invoiceproduct_new',{'invoiceid':app.request.get('invoiceid')}) }}">Create a new invoiceProduct</a>
+        </li>
+    </ul>
+{% endblock %}

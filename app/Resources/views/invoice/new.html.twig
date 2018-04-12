@@ -1,0 +1,64 @@
+{% extends 'baseelements/themebase.html.twig' %}
+
+{% block pagebody %}
+    <h1>Invoice creation</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+    
+        {{ form_row(form.company, { 'attr' : { 'class' : 'js_company' }} ) }}
+        {{ form_row(form.client, { 'attr' : { 'class' : 'js_client' }} ) }}
+        {{ form_row(form.invoiceNo) }}
+        {{ form_row(form.invoiceDate) }}
+        {{ form_row(form.challanNo) }}
+        {{ form_row(form.challanDate) }}
+        {{ form_row(form.poNo) }}
+        {{ form_row(form.poDate) }}
+        {{ form_row(form.poNo2) }}
+        {{ form_row(form.poDate2) }}
+        {{ form_row(form.gstPercentage) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('invoice_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block pagejavsacripts %}
+    <script type="application/javascript">
+        $( document ).ready(function() {
+        	$( ".js_client" ).parent().hide();
+        });
+
+        $( ".js_company" ).change(function() {
+            $company = $( ".js_company" ).val();
+            $invoicenosuggestion = $( ".js_company option:selected" ).data('invoicenosuggestion');
+            $manualid = $( ".js_company option:selected" ).data('manualid');
+            if($company > 0)
+            {
+				/* set invoice no suggestions */
+				$( "#appbundle_invoice_invoiceNo" ).val($invoicenosuggestion);
+				$( "#appbundle_invoice_challanNo" ).val($invoicenosuggestion);
+				$( "#appbundle_invoice_poNo" ).val($invoicenosuggestion);
+				$( "#appbundle_invoice_poNo2" ).val($invoicenosuggestion);
+				$( "#appbundle_invoice_manualid" ).val($manualid);
+                
+            	$( ".js_client" ).parent().show();
+
+				url = "{{ path('clients_of_company') }}";
+				$.post( url, { 'company': $company })
+				  .done(function( data ) {
+					  $( ".js_client" ).html(data);
+				  });
+            }
+            else
+            {
+            	$( ".js_client" ).parent().hide();
+            }
+      	});
+    </script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{{ render(controller('AppBundle:Invoice:show', { 'id': app.request.get('id') })) }}
+
+{% block pagebody %}
+<style>
+	/*html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}*/
+	 @media print
+   {
+      .main-menu-container{ display: none; }
+      .sf-toolbar{ display: none; }
+      .addproductbutton{ display: none; }
+      .editproductbutton{ display: none; }
+      .deleteproductbutton{ display: none; }
+      .addproductblock{ display: none; }
+   }
+	body{margin:0;}
+	.cont-tuns-parts ul{ list-style-type: decimal; }
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;}
+.main-menu-container{ display: none; }
+.sf-toolbar{ display: none; }
+.addproductbutton{ display: none; }
+.editproductbutton{ display: none; }
+.printproductbutton{ display: none; }
+.deleteproductbutton{ display: none; }
+.addproductblock{ display: none; }
+h1{text-transform: uppercase;}
+#wrapper{margin:0 auto; width:100%; max-width:none;}
+#container-wrapper{float:none; margin: 0 auto; width:100%; padding-left:0px;}
+.addproductbutton{text-align:right; width:100%;}
+.main-cont {font-size: 12px;width: 99.5%;margin: 0 auto;}
+</style>
+{% endblock %}
+
+{% block pagejavsacripts %}
+    <script type="application/javascript">
+        $( document ).ready(function() {
+            window.print();
+        });
+    </script>
+{% endblock %}
