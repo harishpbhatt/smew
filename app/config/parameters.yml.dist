@@ -10,11 +10,11 @@ parameters:
 #
 #    POSTGRESQL SETTINGS
     database_driver:    pdo_pgsql
-    database_host:      localhost
-    database_port:      15432
-    database_name:      smew
-    database_user:      postgres
-    database_password:  postgres
+    database_host:      ec2-50-19-232-205.compute-1.amazonaws.com
+    database_port:      5432
+    database_name:      d4btshn5a8ijah
+    database_user:      cjiecdxhtlwlja
+    database_password:  3f807a3d4248bd1ef6b97cf4cb882bf47e50eca3ce1cb1371631604ea235a847
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
