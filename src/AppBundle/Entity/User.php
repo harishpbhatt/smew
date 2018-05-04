@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo; // gedmo annotations
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="tbl_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
@@ -22,7 +22,7 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
 	private $id;
-	
+
 	/**
 	 * @var \DateTime
 	 *

@@ -37,7 +37,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:      
+    globals:
       rupee_symol: ₹
       cgst_18_percentage: 9
       sgst_18_percentage: 9
@@ -47,7 +47,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: '%database_driver%'
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
