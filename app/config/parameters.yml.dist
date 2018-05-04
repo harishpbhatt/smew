@@ -1,0 +1,22 @@
+# This file is auto-generated during the composer install
+parameters:
+#    MYSQL SETTINGS
+#    database_driver: pdo_mysql
+#    database_host: 127.0.0.1
+#    database_port: null
+#    database_name: smew
+#    database_user: root
+#    database_password: 123456
+#
+#    POSTGRESQL SETTINGS
+    database_driver:    pdo_pgsql
+    database_host:      localhost
+    database_port:      15432
+    database_name:      smew
+    database_user:      postgres
+    database_password:  postgres
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 4c2f928f66fe08124504d519a9fc22b2821f8a69
