@@ -3,6 +3,7 @@
 {% block body %}	
     <div id="wrapper">
     	{% block headermenu %}
+    	    {% if app.user %}
                 <div id="container" class="main-menu-container">
                     <div class="main-menu-wrapper">
                     	<ul class="main-menu">
@@ -11,9 +12,11 @@
                     		<li><a href="{{ url('company_index') }}">Companies</a></li>
                     		<li><a href="{{ url('client_index') }}">Clients</a></li>
                     		<li><a href="{{ url('product_index') }}">Products</a></li>
+                    		<li><a href="{{ url('logout') }}">Logout</a></li>
                     	</ul>
                     </div>
                 </div>
+            {% endif %}
         {% endblock %}
         {% block middlebody %}
                 <div id="container">

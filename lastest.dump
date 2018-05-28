@@ -1,0 +1,111 @@
+-- Adminer 4.6.2 PostgreSQL dump
+
+DROP TABLE IF EXISTS "client";
+CREATE TABLE "public"."client" (
+    "id" SERIAL NOT NULL,
+    "company" integer,
+    "deleted_at" timestamp(0),
+    "title" character varying(255) NOT NULL,
+    "gstno" character varying(255) NOT NULL,
+    "street" character varying(255) NOT NULL,
+    "city" character varying(255) NOT NULL,
+    "state" character varying(255) NOT NULL,
+    "pincode" integer NOT NULL,
+    CONSTRAINT "client_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "fk_c74404554fbf094f" FOREIGN KEY (company) REFERENCES company(id) NOT DEFERRABLE
+) WITH (oids = false);
+
+CREATE INDEX "idx_c74404554fbf094f" ON "public"."client" USING btree ("company");
+
+
+DROP TABLE IF EXISTS "company";
+CREATE TABLE "public"."company" (
+    "id" SERIAL NOT NULL,
+    "deleted_at" timestamp(0),
+    "name" character varying(255) NOT NULL,
+    "gstno" character varying(255) NOT NULL,
+    "street" character varying(255) NOT NULL,
+    "city" character varying(255) NOT NULL,
+    "state" character varying(255) NOT NULL,
+    "pincode" integer NOT NULL,
+    CONSTRAINT "company_pkey" PRIMARY KEY ("id")
+) WITH (oids = false);
+
+
+DROP TABLE IF EXISTS "invoice";
+CREATE TABLE "public"."invoice" (
+    "id" SERIAL NOT NULL,
+    "company" integer,
+    "client" integer,
+    "manualid" integer NOT NULL,
+    "deleted_at" timestamp(0),
+    "todaysdate" character varying(255) NOT NULL,
+    "invoiceno" character varying(255) NOT NULL,
+    "invoicedate" character varying(255) NOT NULL,
+    "challanno" character varying(255) NOT NULL,
+    "challandate" character varying(255) NOT NULL,
+    "pono" character varying(255),
+    "podate" character varying(255),
+    "pono2" character varying(255),
+    "podate2" character varying(255),
+    "gstpercentage" character varying(255),
+    CONSTRAINT "invoice_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "fk_906517444fbf094f" FOREIGN KEY (company) REFERENCES company(id) NOT DEFERRABLE,
+    CONSTRAINT "fk_90651744c7440455" FOREIGN KEY (client) REFERENCES client(id) NOT DEFERRABLE
+) WITH (oids = false);
+
+CREATE INDEX "idx_906517444fbf094f" ON "public"."invoice" USING btree ("company");
+
+CREATE INDEX "idx_90651744c7440455" ON "public"."invoice" USING btree ("client");
+
+
+DROP TABLE IF EXISTS "invoice_product";
+CREATE TABLE "public"."invoice_product" (
+    "id" SERIAL NOT NULL,
+    "invoice" integer,
+    "product" integer,
+    "deleted_at" timestamp(0),
+    "quantity" integer NOT NULL,
+    "hsnno" character varying(255),
+    "name" character varying(255) NOT NULL,
+    "drawingcode" character varying(255),
+    "unitprice" double precision NOT NULL,
+    CONSTRAINT "invoice_product_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "fk_2193327e90651744" FOREIGN KEY (invoice) REFERENCES invoice(id) NOT DEFERRABLE,
+    CONSTRAINT "fk_2193327ed34a04ad" FOREIGN KEY (product) REFERENCES product(id) NOT DEFERRABLE
+) WITH (oids = false);
+
+CREATE INDEX "idx_2193327e90651744" ON "public"."invoice_product" USING btree ("invoice");
+
+CREATE INDEX "idx_2193327ed34a04ad" ON "public"."invoice_product" USING btree ("product");
+
+
+DROP TABLE IF EXISTS "product";
+CREATE TABLE "public"."product" (
+    "id" SERIAL NOT NULL,
+    "client" integer,
+    "deleted_at" timestamp(0),
+    "name" character varying(255) NOT NULL,
+    "drawingcode" character varying(255),
+    "unitprice" double precision NOT NULL,
+    CONSTRAINT "product_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "fk_d34a04adc7440455" FOREIGN KEY (client) REFERENCES client(id) NOT DEFERRABLE
+) WITH (oids = false);
+
+CREATE INDEX "idx_d34a04adc7440455" ON "public"."product" USING btree ("client");
+
+
+DROP TABLE IF EXISTS "tbl_user";
+CREATE TABLE "public"."tbl_user" (
+    "id" SERIAL NOT NULL,
+    "deleted_at" timestamp(0),
+    "username" character varying(255) NOT NULL,
+    "password" character varying(255) NOT NULL,
+    "firstname" character varying(255) NOT NULL,
+    "lastname" character varying(255) NOT NULL,
+    CONSTRAINT "tbl_user_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "uniq_38b383a1f85e0677" UNIQUE ("username")
+) WITH (oids = false);
+
+
+-- 2018-05-04 15:02:07.821449+00
